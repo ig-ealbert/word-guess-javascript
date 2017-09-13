@@ -1,0 +1,22 @@
+#word {
+	font-size: 28px;
+}
+
+#misses {
+	width: 240px;
+	height: 50px;
+	display: block;
+}
+
+.block {
+	padding-top: 5px;
+	padding-bottom: 5px;	
+}
+
+.greenBorder {
+	border: 2px solid green;
+}
+
+.redBorder {
+	border: 2px solid red;
+}

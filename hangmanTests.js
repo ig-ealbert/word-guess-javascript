@@ -35,69 +35,70 @@ QUnit.test( "A random word can be chosen", function (assert ) {
 });
 
 QUnit.test( "The random word can be obscured by underscores", function (assert ) {
-  assert.equal( drawBlanks(5), "_____", "A word's letters are replaced with underscores." );
+  hiddenWord = "test";
+  assert.equal( drawBlanks(), "____", "A word's letters are replaced with underscores." );
 });
 
 QUnit.test( "When a correct letter that appears once is guessed, the word is updated with that letter", function (assert ) {
   initializeGame();
   hiddenWord = "test";
-  guessedWord = drawBlanks(4);
+  guessedWord = drawBlanks();
   guessCombo.selectedIndex = 5;
-  letterGuessed(guessCombo);
+  letterGuessed();
   assert.equal( guessedWord, "_e__", "The letter is updated in the guessed word." );
 });
 
 QUnit.test( "When a correct letter that appears once is guessed, the updated word is displayed", function (assert ) {
   initializeGame();
   hiddenWord = "test";
-  guessedWord = drawBlanks(4);
+  guessedWord = drawBlanks();
   guessCombo.selectedIndex = 5;
-  letterGuessed(guessCombo);
+  letterGuessed();
   assert.equal( wordDiv.innerHTML, "_e__", "The letter is updated in the guessed word." );
 });
 
 QUnit.test( "When a correct letter that appears multiple times is guessed, the word is updated with those letters", function (assert ) {
   initializeGame();
   hiddenWord = "test";
-  guessedWord = drawBlanks(4);
+  guessedWord = drawBlanks();
   guessCombo.selectedIndex = 20;
-  letterGuessed(guessCombo);
+  letterGuessed();
   assert.equal( guessedWord, "t__t", "The letters are updated in the guessed word." );
 });
 
 QUnit.test( "When a correct letter that appears multiple times is guessed, the updated word is displayed", function (assert ) {
   initializeGame();
   hiddenWord = "test";
-  guessedWord = drawBlanks(4);
+  guessedWord = drawBlanks();
   guessCombo.selectedIndex = 20;
-  letterGuessed(guessCombo);
+  letterGuessed();
   assert.equal( wordDiv.innerHTML, "t__t", "The letters are updated in the guessed word." );
 });
 
 QUnit.test( "When an incorrect letter is guessed, the number of misses increases by 1", function (assert ) {
   initializeGame();
   hiddenWord = "test";
-  guessedWord = drawBlanks(4);
+  guessedWord = drawBlanks();
   guessCombo.selectedIndex = 1;
-  letterGuessed(guessCombo);
+  letterGuessed();
   assert.equal( misses, 1, "The number of misses increases from 0 to 1." );
 });
 
 QUnit.test( "When an incorrect letter is guessed, another X appears to track misses", function (assert ) {
   initializeGame();
   hiddenWord = "test";
-  guessedWord = drawBlanks(4);
+  guessedWord = drawBlanks();
   guessCombo.selectedIndex = 1;
-  letterGuessed(guessCombo);
+  letterGuessed();
   assert.equal( missesDiv.innerHTML, "<img src=\"miss.png\">", "An X is displayed as a miss tracker." );
 });
 
 QUnit.test( "After a letter is guessed, that letter becomes disabled in the dropdown", function (assert ) {
   initializeGame();
   hiddenWord = "test";
-  guessedWord = drawBlanks(4);
+  guessedWord = drawBlanks();
   guessCombo.selectedIndex = 1;
-  letterGuessed(guessCombo);
+  letterGuessed();
   assert.equal( guessCombo.options[1].disabled, true, "The same letter cannot be guessed again." );
 });
 

@@ -12,9 +12,9 @@ initializeGame();
 function initializeGame() {
   hiddenWord = assignRandomWord();
   guessedWord = drawBlanks();
+  misses = 0;
   wordDiv.innerHTML = guessedWord;
   missesDiv.innerHTML = "";
-  misses = 0;
   messageDiv.className = "";
   messageDiv.innerHTML = "";
   resetButton.classList.remove("greenBorder");
@@ -27,29 +27,28 @@ function assignRandomWord() {
 }
 
 function drawBlanks() {
-  var blankString = "";
-  for (let i = 0; i < hiddenWord.length; i++) {
-    blankString += "_";
-  }
-  return blankString;
+  return "_".repeat(hiddenWord.length);
 }
 
 function resetLetters() {
-  for (let i = 0; i < guessCombo.length; i++) {
-    guessCombo.options[i].disabled = false;
+  for (const option of guessCombo.options) {
+    option.disabled = false;
   }
   guessCombo.disabled = false;
   guessCombo.selectedIndex = 0;
 }
 
 function letterGuessed() {
-  letter = guessCombo.value;
-  if (hiddenWord.indexOf(letter) !== -1) {
-    for (let i = 0; i < hiddenWord.length; i++) {
-      if (letter === hiddenWord[i]) {
-        guessedWord = guessedWord.substring(0, i) + letter + guessedWord.substring(i + 1);
+  const guessedLetter = guessCombo.value;
+  if (hiddenWord.includes(guessedLetter)) {
+    const letters = [...hiddenWord];
+    letters.forEach((letter, index) => {
+      if (guessedLetter === letter) {
+        const start = guessedWord.substring(0, index);
+        const end = guessedWord.substring(index + 1);
+        guessedWord = `${start}${letter}${end}`;
       }
-    }
+    });
     wordDiv.innerHTML = guessedWord;
     checkForWin();
   }
